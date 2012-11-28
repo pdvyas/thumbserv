@@ -43,6 +43,7 @@ exports.serveImage = function(req, res){
                     if(file.statusCode === 404) {
                         console.log('404! aborting')
                         callback(400);
+                        return;
                     }
                 })
                 console.log('got', path, 'processing')
