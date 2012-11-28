@@ -39,10 +39,12 @@ exports.serveImage = function(req, res){
         function (callback) {
             console.log('getting file', path)
             client.getFile(path, function(err, file) {
-                if(file.statusCode >= 400) {
-                    callback(file.statusCode);
-                    return;
-                }
+                file.on('end', function() {
+                    if(file.statusCode === 404) {
+                        console.log('404! aborting')
+                        callback(400);
+                    }
+                })
                 console.log('got', path, 'processing')
                 gm(file)
                 .resize(size[0],size[1])
@@ -56,5 +58,10 @@ exports.serveImage = function(req, res){
                     });
                 })
             });
-        }]);
+        }],
+        function(err) {
+            if(err!== 'done') {
+                res.send(err)
+            }
+        });
 };
