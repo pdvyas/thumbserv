@@ -1,0 +1,22 @@
+{
+  "name": "thumbserv",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=development nodemon app.js"
+  },
+  "engines": {
+      "node": "0.8.8",
+      "npm": "1.1.65"
+  },
+  "dependencies": {
+    "express": "3.0.2",
+    "jade": "*",
+    "knox": "*",
+    "gm": "1.6.0",
+    "gm-buffer": "*",
+    "imagemagick": "*",
+    "sha1": "*",
+    "async": "*"
+  }
+}
