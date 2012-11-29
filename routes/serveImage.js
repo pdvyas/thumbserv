@@ -39,13 +39,11 @@ exports.serveImage = function(req, res){
         function (callback) {
             console.log('getting file', path)
             client.getFile(path, function(err, file) {
-                file.on('end', function() {
-                    if(file.statusCode === 404) {
-                        console.log('404! aborting')
-                        callback(400);
-                        return;
-                    }
-                })
+                if(file.statusCode === 404) {
+                    console.log('404! aborting')
+                    callback(400);
+                    return;
+                }
                 console.log('got', path, 'processing')
                 gm(file)
                 .resize(size[0],size[1])
